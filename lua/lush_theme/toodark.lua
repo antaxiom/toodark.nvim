@@ -85,10 +85,11 @@ local theme = lush(function()
     ErrorMsg { bg = red, fg = toodark },
     LineNr { fg = light6 },
     CursorLineNr { fg = white, gui = "bold" },
+    MatchParen { bg = toodark, fg = blue, gui="underline" },
     NonText { fg = light4},
     Normal { bg = toodark, fg = white  },
     NormalFloat { bg = dark4 , fg = white },
-    CursorLine { bg = dark2 },
+    CursorLine { bg = dark3 },
     Comment { fg = light4},
     VertSplit { bg = dark1, fg = white },
     Folded { Comment },
@@ -107,46 +108,52 @@ local theme = lush(function()
     StatusLine { fg = blue },
     StatusLineNC { bg = blue, fg = toodark },
     Tabline { fg = blue },
-    TablineFill { bg = dark4, fg = light4 },
+    TablineFill { bg = dark4 },
     TablineSel { bg = blue, fg = toodark },
     Title { fg = green, gui="bold"},
     Visual { bg = dark1 },
     VisualNOS { Visual },
     Whitespace { fg = cyan, gui="bold" },
-    WarningMsg { bg = orange, fg = toodark },
+    WarningMsg { bg = orange },
 
     -- Syntax highlighting
-    --
 
-    Constant       { fg = green }, -- (preferred) any constant
+    Constant       { fg = cyan }, -- (preferred) any constant
+    String         { fg = green }, --   a string constant: "this is a string"
+    Character      { fg = green }, --  a character constant: 'c', '\n'
+    Number         { fg = yellow }, --   a number constant: 234, 0xff
+    Boolean        { fg = yellow }, --  a boolean constant: TRUE, false
+    Float          { fg = yellow }, --    a floating point constant: 2.3e10
 
-    Identifier     { fg = red}, -- (preferred) any variable name
+    Identifier     { fg = red }, -- (preferred) any variable name
+    Function       { fg = blue }, -- function name (also: methods for classes)
 
     Statement      { fg = purple }, -- (preferred) any statement
-    -- Conditional    { }, --  if, then, else, endif, switch, etc.
-    -- Repeat         { }, --   for, do, while, etc.
-    -- Label          { }, --    case, default, etc.
-    -- Operator       { }, -- "sizeof", "+", "*", etc.
-    -- Keyword        { }, --  any other keyword
-    -- Exception      { }, --  try, catch, throw
+    Conditional    { fg = purple }, --  if, then, else, endif, switch, etc.
+    Repeat         { fg = purple }, --   for, do, while, etc.
+    Label          { fg = purple }, --    case, default, etc.
+    Operator       { fg = purple }, -- "sizeof", "+", "*", etc.
+    Keyword        { fg = red }, --  any other keyword
+    Exception      { fg = purple }, --  try, catch, throw
 
-    PreProc        { fg = blue }, -- (preferred) generic Preprocessor
-    -- Include        { }, --  preprocessor #include
-    -- Define         { }, --   preprocessor #define
-    -- Macro          { }, --    same as Define
-    -- PreCondit      { }, --  preprocessor #if, #else, #endif, etc.
+    PreProc        { fg = yellow }, -- (preferred) generic Preprocessor
+    Include        { fg = blue }, --  preprocessor #include
+    Define         { fg = purple }, --   preprocessor #define
+    Macro          { fg = purple }, --    same as Define
+    PreCondit      { fg = yellow }, --  preprocessor #if, #else, #endif, etc.
 
     Type           { fg = yellow }, -- (preferred) int, long, char, etc.
-    -- StorageClass   { }, -- static, register, volatile, etc.
-    -- Structure      { }, --  struct, union, enum, etc.
-    -- Typedef        { }, --  A typedef
+    StorageClass   { fg = yellow }, -- static, register, volatile, etc.
+    Structure      { fg = yellow }, --  struct, union, enum, etc.
+    Typedef        { fg = yellow }, --  A typedef
 
-    Special        { fg = blue }, -- (preferred) any special symbol
+    Special        { fg = white }, -- (preferred) any special symbol
     -- SpecialChar    { }, --  special character in a constant
     -- Tag            { }, --    you can use CTRL-] on this
     -- Delimiter      { }, --  character that needs attention
-    -- SpecialComment { }, -- special things inside a comment
+    SpecialComment { fg = light3 }, -- special things inside a comment
     -- Debug          { }, --    debugging statements
+
 
     Underlined { gui = "underline" }, -- (preferred) text that stands out, HTML links
     Bold       { gui = "bold" },
@@ -157,6 +164,59 @@ local theme = lush(function()
     Error          { ErrorMsg }, -- (preferred) any erroneous construct
 
     Todo           { fg = yellow, gui="bold" }, -- (preferred) anything that needs extra attention; mostly the keywords TODO FIXME and XXX
+
+
+    -- TSAnnotation         { };    -- For C++/Dart attributes, annotations that can be attached to the code to denote some kind of meta information.
+    -- TSAttribute          { };    -- (unstable) TODO: docs
+    -- TSBoolean            { };    -- For booleans.
+    -- TSCharacter          { };    -- For characters.
+    -- TSComment            { };    -- For comment blocks.
+    -- TSConstructor        { };    -- For constructor calls and definitions: ` { }` in Lua, and Java constructors.
+    -- TSConditional        { };    -- For keywords related to conditionnals.
+    -- TSConstant           { };    -- For constants
+    -- TSConstBuiltin       { };    -- For constant that are built in the language: `nil` in Lua.
+    -- TSConstMacro         { };    -- For constants that are defined by macros: `NULL` in C.
+    -- TSError              { };    -- For syntax/parser errors.
+    -- TSException          { };    -- For exception related keywords.
+    -- TSField              { };    -- For fields.
+    -- TSFloat              { };    -- For floats.
+    -- TSFunction           { };    -- For function (calls and definitions).
+    -- TSFuncBuiltin        { };    -- For builtin functions: `table.insert` in Lua.
+    -- TSFuncMacro          { };    -- For macro defined fuctions (calls and definitions): each `macro_rules` in Rust.
+    -- TSInclude            { };    -- For includes: `#include` in C, `use` or `extern crate` in Rust, or `require` in Lua.
+    -- TSKeyword            { };    -- For keywords that don't fall in previous categories.
+    -- TSKeywordFunction    { };    -- For keywords used to define a fuction.
+    -- TSLabel              { };    -- For labels: `label:` in C and `:label:` in Lua.
+    -- TSMethod             { };    -- For method calls and definitions.
+    -- TSNamespace          { };    -- For identifiers referring to modules and namespaces.
+    -- TSNone               { };    -- TODO: docs
+    -- TSNumber             { };    -- For all numbers
+    -- TSOperator           { };    -- For any operator: `+`, but also `->` and `*` in C.
+    -- TSParameter          { };    -- For parameters of a function.
+    -- TSParameterReference { };    -- For references to parameters of a function.
+    -- TSProperty           { };    -- Same as `TSField`.
+    -- TSPunctDelimiter     { };    -- For delimiters ie: `.`
+    -- TSPunctBracket       { };    -- For brackets and parens.
+    -- TSPunctSpecial       { };    -- For special punctutation that does not fall in the catagories before.
+    -- TSRepeat             { };    -- For keywords related to loops.
+    -- TSString             { };    -- For strings.
+    -- TSStringRegex        { };    -- For regexes.
+    -- TSStringEscape       { };    -- For escape characters within a string.
+    -- TSSymbol             { };    -- For identifiers referring to symbols or atoms.
+    -- TSType               { };    -- For types.
+    -- TSTypeBuiltin        { };    -- For builtin types.
+    -- TSVariable           { };    -- Any variable name that does not have another highlight.
+    -- TSVariableBuiltin    { };    -- Variable names that are defined by the languages, like `this` or `self`.
+
+    -- TSTag                { };    -- Tags like html tag names.
+    -- TSTagDelimiter       { };    -- Tag delimiter like `<` `>` `/`
+    -- TSText               { };    -- For strings considered text in a markup language.
+    -- TSEmphasis           { };    -- For text to be represented with emphasis.
+    -- TSUnderline          { };    -- For text to be represented with an underline.
+    -- TSStrike             { };    -- For strikethrough text.
+    -- TSTitle              { };    -- Text that is part of a title.
+    -- TSLiteral            { };    -- Literal text.
+    -- TSURI                { };    -- Any URI like a link or email.
 
     -- EXAMPLES
 
