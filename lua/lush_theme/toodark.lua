@@ -45,8 +45,121 @@
 local lush = require('lush')
 local hsl = lush.hsl
 
+-- Color Pallete
+local red = hsl("#e23f36")
+local orange = hsl("#f96f04")
+local yellow = hsl("#edcf3b")
+local green = hsl("#5edb83")
+local cyan = hsl("#56b6c2")
+local blue = hsl("#61afef")
+local purple = hsl("#e579d3")
+
+-- Shades
+-- Dark
+local dark1 = hsl("#2A2A2A")
+local dark2 = hsl("#202020")
+local dark3 = hsl("#1C1C1C")
+local dark4 = hsl("#181818")
+local toodark = hsl("#111111")
+local black = hsl("#000000")
+-- "Light"
+local light1 = hsl("#BBBBBB")
+local light2 = hsl("#AAAAAA")
+local light3 = hsl("#454545")
+local light4 = hsl("#383838")
+local light5 = hsl("#303030")
+local light6 = hsl("#2F2F2F")
+local white = hsl("#DDDDDD")
+
 local theme = lush(function()
   return {
+
+    -- Standard vim colors
+
+    Directory { fg = blue },
+    DiffAdd { fg = green },
+    DiffChange { fg = orange },
+    DiffDelete { fg = red },
+    DiffText { bg = orange, fg = toodark },
+    EndOfBuffer { fg = light6 },
+    ErrorMsg { bg = red, fg = toodark },
+    LineNr { fg = light6 },
+    CursorLineNr { fg = white, gui = "bold" },
+    NonText { fg = light4},
+    Normal { bg = toodark, fg = white  },
+    NormalFloat { bg = dark4 , fg = white },
+    CursorLine { bg = dark2 },
+    Comment { fg = light4},
+    VertSplit { bg = dark1, fg = white },
+    Folded { Comment },
+    FoldColumn { Folded },
+    Pmenu { bg = light6, fg = white},
+    PmenuSel { bg = blue, fg = toodark },
+    PmenuSbar { bg = light3 },
+    PmenuTHumb { bg = light2 },
+    Question { fg = green, gui="bold"},
+    Search { bg = yellow, fg = toodark },
+    SpecialKey { fg = cyan, gui="bold" },
+    SpellBad { fg = red.saturate(-10), gui="underline" },
+    SpellCap { fg = yellow.saturate(-10), gui="bold"},
+    SpellLocal { SpellCap, gui="none"},
+    SpellRare { SpellBad, gui="none"},
+    StatusLine { fg = blue },
+    StatusLineNC { bg = blue, fg = toodark },
+    Tabline { fg = blue },
+    TablineFill { bg = dark4, fg = light4 },
+    TablineSel { bg = blue, fg = toodark },
+    Title { fg = green, gui="bold"},
+    Visual { bg = dark1 },
+    VisualNOS { Visual },
+    Whitespace { fg = cyan, gui="bold" },
+    WarningMsg { bg = orange, fg = toodark },
+
+    -- Syntax highlighting
+    --
+
+    Constant       { fg = green }, -- (preferred) any constant
+
+    Identifier     { fg = red}, -- (preferred) any variable name
+
+    Statement      { fg = purple }, -- (preferred) any statement
+    -- Conditional    { }, --  if, then, else, endif, switch, etc.
+    -- Repeat         { }, --   for, do, while, etc.
+    -- Label          { }, --    case, default, etc.
+    -- Operator       { }, -- "sizeof", "+", "*", etc.
+    -- Keyword        { }, --  any other keyword
+    -- Exception      { }, --  try, catch, throw
+
+    PreProc        { fg = blue }, -- (preferred) generic Preprocessor
+    -- Include        { }, --  preprocessor #include
+    -- Define         { }, --   preprocessor #define
+    -- Macro          { }, --    same as Define
+    -- PreCondit      { }, --  preprocessor #if, #else, #endif, etc.
+
+    Type           { fg = yellow }, -- (preferred) int, long, char, etc.
+    -- StorageClass   { }, -- static, register, volatile, etc.
+    -- Structure      { }, --  struct, union, enum, etc.
+    -- Typedef        { }, --  A typedef
+
+    Special        { fg = blue }, -- (preferred) any special symbol
+    -- SpecialChar    { }, --  special character in a constant
+    -- Tag            { }, --    you can use CTRL-] on this
+    -- Delimiter      { }, --  character that needs attention
+    -- SpecialComment { }, -- special things inside a comment
+    -- Debug          { }, --    debugging statements
+
+    Underlined { gui = "underline" }, -- (preferred) text that stands out, HTML links
+    Bold       { gui = "bold" },
+    Italic     { gui = "italic" },
+
+    Ignore         { }, -- (preferred) left blank, hidden  |hl-Ignore|
+
+    Error          { ErrorMsg }, -- (preferred) any erroneous construct
+
+    Todo           { fg = yellow, gui="bold" }, -- (preferred) anything that needs extra attention; mostly the keywords TODO FIXME and XXX
+
+    -- EXAMPLES
+
     -- The following are all the Neovim default highlight groups from the docs
     -- as of 0.5.0-nightly-446, to aid your theme creation. Your themes should
     -- probably style all of these at a bare minimum.
@@ -101,7 +214,7 @@ local theme = lush(function()
     -- QuickFixLine { }, -- Current |quickfix| item in the quickfix window. Combined with |hl-CursorLine| when the cursor is there.
     -- Search       { }, -- Last search pattern highlighting (see 'hlsearch').  Also used for similar items that need to stand out.
     -- SpecialKey   { }, -- Unprintable characters: text displayed differently from what it really is.  But not 'listchars' whitespace. |hl-Whitespace|
-    -- SpellBad     { }, -- Word that is not recognized by the spellchecker. |spell| Combined with the highlighting used otherwise. 
+    -- SpellBad     { }, -- Word that is not recognized by the spellchecker. |spell| Combined with the highlighting used otherwise.
     -- SpellCap     { }, -- Word that should start with a capital. |spell| Combined with the highlighting used otherwise.
     -- SpellLocal   { }, -- Word that is recognized by the spellchecker as one that is used in another region. |spell| Combined with the highlighting used otherwise.
     -- SpellRare    { }, -- Word that is recognized by the spellchecker as one that is hardly ever used.  |spell| Combined with the highlighting used otherwise.

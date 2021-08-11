@@ -1,5 +1,6 @@
-A Lush Theme for Neovim.
+Toodark: an extra dark theme for Neovim
 ===
 
-See: http://git.io/lush.nvim for more information on Lush and a helper script
-to setup your repo clone.
+Made using the [toodark](https://github.com/antaxiom/toodark16.git) scheme
+
+Made with the great help of [lush.nvim](http://git.io/lush.nvim)
