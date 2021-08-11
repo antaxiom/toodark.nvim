@@ -1,5 +1,4 @@
 Toodark: an extra dark theme for Neovim
-===
 
 Made using the [toodark](https://github.com/antaxiom/toodark16.git) scheme
 
