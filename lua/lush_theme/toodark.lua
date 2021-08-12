@@ -48,7 +48,8 @@ local hsl = lush.hsl
 -- Color Pallete
 local red = hsl("#e23f36")
 local orange = hsl("#f96f04")
-local yellow = hsl("#edcf3b")
+local bright_yellow = hsl("#edcf3b")
+local yellow = bright_yellow.saturate(-20)
 local green = hsl("#5edb83")
 local cyan = hsl("#56b6c2")
 local blue = hsl("#61afef")
@@ -65,17 +66,17 @@ local black = hsl("#000000")
 -- "Light"
 local light1 = hsl("#BBBBBB")
 local light2 = hsl("#AAAAAA")
-local light3 = hsl("#454545")
-local light4 = hsl("#383838")
-local light5 = hsl("#303030")
-local light6 = hsl("#2F2F2F")
+local light3 = hsl("#4A4A4A")
+local light4 = hsl("#454545")
+local light5 = hsl("#383838")
+local light6 = hsl("#303030")
+local light7 = hsl("#2F2F2F")
 local white = hsl("#DDDDDD")
 
 local theme = lush(function()
   return {
 
     -- Standard vim colors
-
     Directory { fg = blue },
     DiffAdd { fg = green },
     DiffChange { fg = orange },
@@ -85,14 +86,14 @@ local theme = lush(function()
     ErrorMsg { bg = red, fg = toodark },
     LineNr { fg = light6 },
     CursorLineNr { fg = white, gui = "bold" },
-    MatchParen { bg = toodark, fg = blue, gui="underline" },
-    NonText { fg = light4},
-    Normal { bg = toodark, fg = white  },
+    MatchParen { fg = blue, gui="underline" },
+    NonText { fg = light1 },
+    Normal { fg = white },
     NormalFloat { bg = dark4 , fg = white },
     CursorLine { bg = dark3 },
-    Comment { fg = light4},
+    Comment { fg = light3 },
     VertSplit { bg = dark1, fg = white },
-    Folded { Comment },
+    Folded { fg = light2 },
     FoldColumn { Folded },
     Pmenu { bg = light6, fg = white},
     PmenuSel { bg = blue, fg = toodark },
@@ -102,19 +103,18 @@ local theme = lush(function()
     Search { bg = yellow, fg = toodark },
     SpecialKey { fg = cyan, gui="bold" },
     SpellBad { fg = red.saturate(-10), gui="underline" },
-    SpellCap { fg = yellow.saturate(-10), gui="bold"},
+    SpellCap { fg = yellow, gui="bold"},
     SpellLocal { SpellCap, gui="none"},
     SpellRare { SpellBad, gui="none"},
     StatusLine { fg = blue },
-    StatusLineNC { bg = blue, fg = toodark },
     Tabline { fg = blue },
-    TablineFill { bg = dark4 },
-    TablineSel { bg = blue, fg = toodark },
+    TablineFill { fg = light3 },
+    TablineSel { fg = blue },
     Title { fg = green, gui="bold"},
-    Visual { bg = dark1 },
+    Visual { bg = dark2 },
     VisualNOS { Visual },
     Whitespace { fg = cyan, gui="bold" },
-    WarningMsg { bg = orange },
+    WarningMsg { fg = yellow },
 
     -- Syntax highlighting
 
@@ -147,11 +147,11 @@ local theme = lush(function()
     Structure      { fg = yellow }, --  struct, union, enum, etc.
     Typedef        { fg = yellow }, --  A typedef
 
-    Special        { fg = white }, -- (preferred) any special symbol
-    -- SpecialChar    { }, --  special character in a constant
+    Special        { }, -- (preferred) any special symbol
+    SpecialChar    { fg = blue }, --  special character in a constant
     -- Tag            { }, --    you can use CTRL-] on this
     -- Delimiter      { }, --  character that needs attention
-    SpecialComment { fg = light3 }, -- special things inside a comment
+    SpecialComment { }, -- special things inside a comment
     -- Debug          { }, --    debugging statements
 
 
@@ -165,58 +165,90 @@ local theme = lush(function()
 
     Todo           { fg = yellow, gui="bold" }, -- (preferred) anything that needs extra attention; mostly the keywords TODO FIXME and XXX
 
+    -- Language specific stuff
 
-    -- TSAnnotation         { };    -- For C++/Dart attributes, annotations that can be attached to the code to denote some kind of meta information.
-    -- TSAttribute          { };    -- (unstable) TODO: docs
-    -- TSBoolean            { };    -- For booleans.
-    -- TSCharacter          { };    -- For characters.
-    -- TSComment            { };    -- For comment blocks.
-    -- TSConstructor        { };    -- For constructor calls and definitions: ` { }` in Lua, and Java constructors.
-    -- TSConditional        { };    -- For keywords related to conditionnals.
-    -- TSConstant           { };    -- For constants
-    -- TSConstBuiltin       { };    -- For constant that are built in the language: `nil` in Lua.
-    -- TSConstMacro         { };    -- For constants that are defined by macros: `NULL` in C.
-    -- TSError              { };    -- For syntax/parser errors.
-    -- TSException          { };    -- For exception related keywords.
-    -- TSField              { };    -- For fields.
-    -- TSFloat              { };    -- For floats.
-    -- TSFunction           { };    -- For function (calls and definitions).
-    -- TSFuncBuiltin        { };    -- For builtin functions: `table.insert` in Lua.
-    -- TSFuncMacro          { };    -- For macro defined fuctions (calls and definitions): each `macro_rules` in Rust.
-    -- TSInclude            { };    -- For includes: `#include` in C, `use` or `extern crate` in Rust, or `require` in Lua.
-    -- TSKeyword            { };    -- For keywords that don't fall in previous categories.
-    -- TSKeywordFunction    { };    -- For keywords used to define a fuction.
-    -- TSLabel              { };    -- For labels: `label:` in C and `:label:` in Lua.
-    -- TSMethod             { };    -- For method calls and definitions.
-    -- TSNamespace          { };    -- For identifiers referring to modules and namespaces.
-    -- TSNone               { };    -- TODO: docs
-    -- TSNumber             { };    -- For all numbers
-    -- TSOperator           { };    -- For any operator: `+`, but also `->` and `*` in C.
-    -- TSParameter          { };    -- For parameters of a function.
-    -- TSParameterReference { };    -- For references to parameters of a function.
-    -- TSProperty           { };    -- Same as `TSField`.
-    -- TSPunctDelimiter     { };    -- For delimiters ie: `.`
-    -- TSPunctBracket       { };    -- For brackets and parens.
-    -- TSPunctSpecial       { };    -- For special punctutation that does not fall in the catagories before.
-    -- TSRepeat             { };    -- For keywords related to loops.
-    -- TSString             { };    -- For strings.
-    -- TSStringRegex        { };    -- For regexes.
-    -- TSStringEscape       { };    -- For escape characters within a string.
-    -- TSSymbol             { };    -- For identifiers referring to symbols or atoms.
-    -- TSType               { };    -- For types.
-    -- TSTypeBuiltin        { };    -- For builtin types.
-    -- TSVariable           { };    -- Any variable name that does not have another highlight.
-    -- TSVariableBuiltin    { };    -- Variable names that are defined by the languages, like `this` or `self`.
+    -- Fish
+    fishKeyword { fg = purple },
+    fishConditional { fg = purple },
 
-    -- TSTag                { };    -- Tags like html tag names.
-    -- TSTagDelimiter       { };    -- Tag delimiter like `<` `>` `/`
-    -- TSText               { };    -- For strings considered text in a markup language.
-    -- TSEmphasis           { };    -- For text to be represented with emphasis.
-    -- TSUnderline          { };    -- For text to be represented with an underline.
-    -- TSStrike             { };    -- For strikethrough text.
-    -- TSTitle              { };    -- Text that is part of a title.
-    -- TSLiteral            { };    -- Literal text.
-    -- TSURI                { };    -- Any URI like a link or email.
+    -- HTML
+
+    htmlArg { fg = yellow },
+    htmlBold { fg = yellow, gui = "bold" },
+    htmlEndTag { fg = white },
+    htmlH1 { fg = red },
+    htmlH2 { fg = red },
+    htmlH3 { fg = red },
+    htmlH4 { fg = red },
+    htmlH5 { fg = red },
+    htmlH6 { fg = red },
+    htmlItalic { fg = purple, gui = "italic" },
+    htmlLink { fg = cyan, gui = "underline" },
+    htmlSpecialChar { fg = yellow },
+    htmlSpecialTagName { fg = red },
+    htmlTag { fg = white },
+    htmlTagN { fg = red },
+    htmlTagName { fg = red },
+    htmlTitle { fg = white },
+
+    -- Markdown
+
+    markdownBlockquote { fg = Comment.fg },
+    markdownBold { fg = yellow, gui = "bold" },
+    markdownCode { fg = green },
+    markdownCodeBlock { fg = green },
+    markdownCodeDelimiter { fg = green },
+    markdownH1 { fg = red },
+    markdownH2 { fg = red },
+    markdownH3 { fg = red },
+    markdownH4 { fg = red },
+    markdownH5 { fg = red },
+    markdownH6 { fg = red },
+    markdownHeadingDelimiter { fg = red },
+    markdownHeadingRule { fg = Comment.fg },
+    markdownId { fg = purple },
+    markdownIdDeclaration { fg = blue },
+    markdownIdDelimiter { fg = purple },
+    markdownItalic { fg = purple, gui = "italic" },
+    markdownLinkDelimiter { fg = purple },
+    markdownLinkText { fg = blue },
+    markdownListMarker { fg = red },
+    markdownOrderedListMarker { fg = red },
+    markdownRule { fg = Comment.fg },
+    markdownUrl { fg = cyan, gui = "underline" },
+
+    -- plasticboy/vim-markdown
+    mkdDelimiter { fg = purple },
+    mkdHeading { fg = red },
+    mkdLink { fg = blue },
+    mkdURL { fg = cyan, gui = "underline" },
+
+
+    -- TeX
+    texStatement { fg = purple },
+    texSubscripts { fg = yellow },
+    texSuperscripts { fg = yellow },
+    texTodo { fg = red },
+    texBeginEnd { fg = purple },
+    texBeginEndName { fg = blue },
+    texMathMatcher { fg = blue },
+    texMathDelim { fg = blue },
+    texDelimiter { fg = yellow },
+    texSpecialChar { fg = yellow },
+    texCite { fg = blue },
+    texRefZone { fg = blue },
+
+    -- TypeScript
+    typescriptReserved { fg = purple },
+    typescriptEndColons { fg = white },
+    typescriptBraces { fg = white },
+
+    -- XML
+    xmlAttrib { fg = yellow },
+    xmlEndTag { fg = red },
+    xmlTag { fg = red },
+    xmlTagName { fg = red },
+
 
     -- EXAMPLES
 
@@ -434,7 +466,7 @@ local theme = lush(function()
     -- TSLiteral            { };    -- Literal text.
     -- TSURI                { };    -- Any URI like a link or email.
 
-  }
+    }
 end)
 
 -- return our parsed theme for extension or use else where.
