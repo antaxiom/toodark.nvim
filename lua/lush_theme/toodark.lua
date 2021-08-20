@@ -48,10 +48,9 @@ local hsl = lush.hsl
 -- Color Pallete
 local red = hsl("#e23f36")
 local orange = hsl("#f96f04")
-local bright_yellow = hsl("#edcf3b")
-local yellow = bright_yellow.saturate(-20)
+local yellow = hsl("#efd14c")
 local green = hsl("#5edb83")
-local cyan = hsl("#56b6c2")
+local cyan = hsl("#61ccc4")
 local blue = hsl("#61afef")
 local purple = hsl("#e579d3")
 
@@ -83,19 +82,20 @@ local theme = lush(function()
     DiffDelete { fg = red },
     DiffText { bg = orange, fg = toodark },
     EndOfBuffer { fg = light6 },
-    ErrorMsg { bg = red, fg = toodark },
+    ErrorMsg { bg = toodark, fg = red },
     LineNr { fg = light6 },
     CursorLineNr { fg = white, gui = "bold" },
     MatchParen { fg = blue, gui="underline" },
-    NonText { fg = light1 },
+    NonText { fg = light6 },
     Normal { fg = white },
     NormalFloat { bg = dark4 , fg = white },
     CursorLine { bg = dark3 },
     Comment { fg = light3 },
-    VertSplit { bg = dark1, fg = white },
-    Folded { fg = light2 },
+    VertSplit { bg = dark4, fg = white },
+    Folded { Normal },
     FoldColumn { Folded },
-    Pmenu { bg = light6, fg = white},
+    SignColumn { Folded },
+    Pmenu { bg = light6, fg = white },
     PmenuSel { bg = blue, fg = toodark },
     PmenuSbar { bg = light3 },
     PmenuTHumb { bg = light2 },
@@ -108,7 +108,7 @@ local theme = lush(function()
     SpellRare { SpellBad, gui="none"},
     StatusLine { fg = blue },
     Tabline { fg = blue },
-    TablineFill { fg = light3 },
+    TablineFill { fg = light3, bg = dark4 },
     TablineSel { fg = blue },
     Title { fg = green, gui="bold"},
     Visual { bg = dark2 },
