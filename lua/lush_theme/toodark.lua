@@ -47,7 +47,7 @@ local hsl = lush.hsl
 
 -- Color Pallete
 local red = hsl("#e23f36")
-local orange = hsl("#f96f04")
+local orange = hsl("#f97f04")
 local yellow = hsl("#efd14c")
 local green = hsl("#5edb83")
 local cyan = hsl("#61ccc4")
@@ -98,7 +98,7 @@ local theme = lush(function()
     Pmenu { bg = light6, fg = white },
     PmenuSel { bg = blue, fg = toodark },
     PmenuSbar { bg = light3 },
-    PmenuTHumb { bg = light2 },
+    PmenuThumb { bg = light2 },
     Question { fg = green, gui="bold"},
     Search { bg = yellow, fg = toodark },
     SpecialKey { fg = cyan, gui="bold" },
@@ -249,6 +249,11 @@ local theme = lush(function()
     xmlTag { fg = red },
     xmlTagName { fg = red },
 
+    -- Dashboard.nvim colors
+    DashboardHeader { fg = orange },
+    DashboardCenter { fg = blue },
+    DashboardShortcut { fg = green },
+    DashboardFooter { fg = yellow },
 
     -- EXAMPLES
 
